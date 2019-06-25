@@ -32,8 +32,17 @@ Retrieves all parameter/profile assignments.
 
 Request Structure
 -----------------
-No parameters available
+.. table:: Request Query Parameters
 
+	+-----------+----------+---------------------------------------------------------------------------------------------------------------+
+	| Name      | Required | Description                                                                                                   |
+	+===========+==========+===============================================================================================================+
+	| orderby   | no       | Choose the ordering of the results - must be the name of one of the fields of the objects in the ``response`` |
+	|           |          | array                                                                                                         |
+	+-----------+----------+---------------------------------------------------------------------------------------------------------------+
+	| sortOrder | no       | Changes the order of sorting. Either ascending (default) or descending ("desc")                               |
+	+-----------+----------+---------------------------------------------------------------------------------------------------------------+
+	
 Response Structure
 ------------------
 :lastUpdated: The date and time at which this profile/parameter association was last modified

@@ -40,6 +40,11 @@ Request Structure
 	+----------+----------+------------------------------------------------------------------------------------------+
 	| username | no       | Return only the user with this username                                                  |
 	+----------+----------+------------------------------------------------------------------------------------------+
+	|  orderby | no 	  | Choose the ordering of the results - must be the name of one of the fields of the  		 |
+	| 		   |          | objects in the ``response`` array                                                  		 |
+	+----------+----------+------------------------------------------------------------------------------------------+
+	| sortOrder| no       | Changes the order of sorting. Either ascending (default) or descending ("desc")          |
+	+----------+----------+------------------------------------------------------------------------------------------+
 
 .. versionadded:: 1.4
 	The ``id`` and ``username`` query parameters were added in the 1.4 API.

@@ -33,9 +33,14 @@ Request Structure
 .. table:: Request Query Parameters
 
 	+----------------+----------+-----------------------------------------------------------------------------------------------------+
-	| Parameter      | Required |                                 Description                                                         |
+	| Parameter      | Required | Description                                                                                         |
 	+================+==========+=====================================================================================================+
-	|   cachegroup   | no       | An integral, unique identifier for a Cache Group - only ANSs for this Cache Group will be returned. |
+	| cachegroup     | no       | An integral, unique identifier for a Cache Group - only ANSs for this Cache Group will be returned. |
+	+----------------+----------+-----------------------------------------------------------------------------------------------------+
+	| orderby        | no       | Choose the ordering of the results - must be the name of one of the fields of the objects in the    |
+	|                |          | ``response`` array                                                                                  |
+	+----------------+----------+-----------------------------------------------------------------------------------------------------+
+	| sortOrder      | no       | Changes the order of sorting. Either ascending (default) or descending ("desc")                     |
 	+----------------+----------+-----------------------------------------------------------------------------------------------------+
 
 Response Structure

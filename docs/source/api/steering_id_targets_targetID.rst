@@ -35,11 +35,16 @@ Request Structure
 .. table:: Request Path Parameters
 
 	+----------+--------------------------------------------------------------------------------------------------------------------------------------+
-	|   Name   |                Description                                                                                                           |
+	| Name     | Description                                                                                                                          |
 	+==========+======================================================================================================================================+
-	|    ID    | The integral, unique identifier of a steering :term:`Delivery Service`                                                               |
+	| ID       | The integral, unique identifier of a steering :term:`Delivery Service`                                                               |
 	+----------+--------------------------------------------------------------------------------------------------------------------------------------+
 	| targetID | The integral, unique identifier of a :term:`Delivery Service` which is a target of the :term:`Delivery Service` identified by ``ID`` |
+	+----------+--------------------------------------------------------------------------------------------------------------------------------------+
+	| orderby  | Choose the ordering of the results - must be the name of one of the fields of the objects in the ``response`` array                  |
+	+----------+--------------------------------------------------------------------------------------------------------------------------------------+
+	| sortOrde | Changes the order of sorting. Either ascending (default) or descending ("desc")                                                      |
+	| r        |                                                                                                                                      |
 	+----------+--------------------------------------------------------------------------------------------------------------------------------------+
 
 .. code-block:: http

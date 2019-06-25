@@ -32,21 +32,26 @@ Request Structure
 .. table:: Request Query Parameters
 
 	+------------+----------+-------------------------------------------------------------------------------------------------------------------+
-	|    Name    | Required |                                                Description                                                        |
+	| Name       | Required | Description                                                                                                       |
 	+============+==========+===================================================================================================================+
 	| cachegroup | no       | Return only those servers within the :term:`Cache Group` identified by this integral, unique identifier           |
 	+------------+----------+-------------------------------------------------------------------------------------------------------------------+
-	|    dsId    | no       | Return only those servers assigned to the :term:`Delivery Service` identified by this integral, unique identifier |
+	| dsId       | no       | Return only those servers assigned to the :term:`Delivery Service` identified by this integral, unique identifier |
 	+------------+----------+-------------------------------------------------------------------------------------------------------------------+
-	|  hostName  | no       | Return only those servers that have this (short) hostname                                                         |
+	| hostName   | no       | Return only those servers that have this (short) hostname                                                         |
 	+------------+----------+-------------------------------------------------------------------------------------------------------------------+
-	|     id     | no       | Return only the server with this integral, unique identifier                                                      |
+	| id         | no       | Return only the server with this integral, unique identifier                                                      |
 	+------------+----------+-------------------------------------------------------------------------------------------------------------------+
-	|  profileId | no       | Return only those servers that are using the profile identified by this integral, unique identifier               |
+	| profileId  | no       | Return only those servers that are using the profile identified by this integral, unique identifier               |
 	+------------+----------+-------------------------------------------------------------------------------------------------------------------+
-	|   status   | no       | Return only those servers with this status - see :ref:`health-proto`                                              |
+	| status     | no       | Return only those servers with this status - see :ref:`health-proto`                                              |
 	+------------+----------+-------------------------------------------------------------------------------------------------------------------+
-	|    type    | no       | Return only servers of this 'type'                                                                                |
+	| type       | no       | Return only servers of this 'type'                                                                                |
+	+------------+----------+-------------------------------------------------------------------------------------------------------------------+
+	| orderby    | no       | Choose the ordering of the results - must be the name of one of the fields of the objects in the ``response``     |
+	|            |          | array                                                                                                             |
+	+------------+----------+-------------------------------------------------------------------------------------------------------------------+
+	| sortOrder  | no       | Changes the order of sorting. Either ascending (default) or descending ("desc")                                   |
 	+------------+----------+-------------------------------------------------------------------------------------------------------------------+
 
 .. code-block:: http

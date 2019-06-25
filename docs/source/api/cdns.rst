@@ -28,7 +28,17 @@ Extract information about all CDNs
 
 Request Structure
 -----------------
-No parameters available
+
+.. :table:: Request Query Parameters
+
++----------------+----------+-----------------------------------------------------------------------------------------------------+
+| Parameter      | Required |                                 Description                                                         |
++================+==========+=====================================================================================================+
+|    orderby 	 | no 		| Choose the ordering of the results - must be the name of one of the fields of the  				  |
+| 		  		 |          | objects in the ``response`` array                                                  				  |
++----------------+----------+-----------------------------------------------------------------------------------------------------+
+|   sortOrder    | no       | Changes the order of sorting. Either ascending (default) or descending ("desc")                     |
++----------------+----------+-----------------------------------------------------------------------------------------------------+
 
 Response Structure
 ------------------

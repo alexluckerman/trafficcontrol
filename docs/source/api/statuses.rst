@@ -32,13 +32,19 @@ Request Structure
 .. table:: Request Query Parameters
 
 	+-------------+----------+--------------------------------------------------------------+
-	|    Name     | Required | Description                                                  |
+	| Name        | Required | Description                                                  |
 	+=============+==========+==============================================================+
-	| description |    no    | Return only statuses with this *exact* description           |
+	| description | no       | Return only statuses with this *exact* description           |
 	+-------------+----------+--------------------------------------------------------------+
-	|     id      |    no    | Return only the status with this integral, unique identifier |
+	| id          | no       | Return only the status with this integral, unique identifier |
 	+-------------+----------+--------------------------------------------------------------+
-	|    name     |    no    | Return only statuses with this name                          |
+	| name        | no       | Return only statuses with this name                          |
+	+-------------+----------+--------------------------------------------------------------+
+	| orderby     | no       | Choose the ordering of the results - must be the name of one |
+	|             |          | of the fields of the objects in the ``response`` array       |
+	+-------------+----------+--------------------------------------------------------------+
+	| sortOrder   | no       | Changes the order of sorting. Either ascending (default) or  |
+	|             |          | descending ("desc")                                          |
 	+-------------+----------+--------------------------------------------------------------+
 
 .. code-block:: http
