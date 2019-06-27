@@ -46,6 +46,10 @@ Request Structure
 	| sortOrde | Changes the order of sorting. Either ascending (default) or descending ("desc")                                                      |
 	| r        |                                                                                                                                      |
 	+----------+--------------------------------------------------------------------------------------------------------------------------------------+
+	| limit    | Choose the number of results to return                                                                                               |
+	+----------+--------------------------------------------------------------------------------------------------------------------------------------+
+	| offset   | The number of results to skip before beginning to return results                                                                     |
+	+----------+--------------------------------------------------------------------------------------------------------------------------------------+
 
 .. code-block:: http
 	:caption: Request Example

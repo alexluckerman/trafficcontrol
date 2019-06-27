@@ -57,6 +57,10 @@ Request Structure
 	+-----------------+----------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 	| sortOrder       | no       | Changes the order of sorting. Either ascending (default) or descending ("desc")                                                                                     |
 	+-----------------+----------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+	| limit           | no       | Choose the number of results to return                                                                                                                              |
+	+-----------------+----------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+	| offset          | no       | The number of results to skip before beginning to return results                                                                                                    |
+	+-----------------+----------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 .. note:: Several fields of origin definitions which are filterable by Query Parameters are allowed to be ``null``. ``null`` values in these fields will be filtered *out* appropriately by such Query Parameters, but do note that ``null`` is not a valid value accepted by any of these Query Parameters, and attempting to pass it will result in an error.
 

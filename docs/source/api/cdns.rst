@@ -31,14 +31,18 @@ Request Structure
 
 .. :table:: Request Query Parameters
 
-+----------------+----------+-----------------------------------------------------------------------------------------------------+
-| Parameter      | Required |                                 Description                                                         |
-+================+==========+=====================================================================================================+
-|    orderby 	 | no 		| Choose the ordering of the results - must be the name of one of the fields of the  				  |
-| 		  		 |          | objects in the ``response`` array                                                  				  |
-+----------------+----------+-----------------------------------------------------------------------------------------------------+
-|   sortOrder    | no       | Changes the order of sorting. Either ascending (default) or descending ("desc")                     |
-+----------------+----------+-----------------------------------------------------------------------------------------------------+
++-----------+----------+-----------------------------------------------------------------------------------+
+| Parameter | Required | Description                                                                       |
++===========+==========+===================================================================================+
+| orderby   | no       | Choose the ordering of the results - must be the name of one of the fields of the |
+|           |          | objects in the ``response`` array                                                 |
++-----------+----------+-----------------------------------------------------------------------------------+
+| sortOrder | no       | Changes the order of sorting. Either ascending (default) or descending ("desc")   |
++-----------+----------+-----------------------------------------------------------------------------------+
+| limit     | no       | Choose the number of results to return                                            |
++-----------+----------+-----------------------------------------------------------------------------------+
+| offset    | no       | The number of results to skip before beginning to return results                  |
++-----------+----------+-----------------------------------------------------------------------------------+
 
 Response Structure
 ------------------
