@@ -32,72 +32,61 @@ describe('Traffic Portal Delivery Services Suite', function() {
 		longDesc: "This is only a test that should be disposed of by Automated UI Testing."
 	};
 
-	it('should open ds page and click button to create a new one', function() {
+	it('should open ds page and click button to create a new one', async () => {
 		console.log('Opening delivery services page');
-		browser.setLocation("delivery-services");
+		await browser.setLocation("delivery-services");
 		expect(browser.getCurrentUrl().then(commonFunctions.urlPath)).toEqual(commonFunctions.urlPath(browser.baseUrl)+"#!/delivery-services");
 	});
 
-	it('should create and select type of ds from the dropdown and confirm', function() {
+	it('should create and select type of ds from the dropdown and confirm', async () => {
 		console.log('Clicked Create New and selecting a type');
-		browser.driver.findElement(by.name('createDeliveryServiceButton')).click();
+		await browser.driver.findElement(by.name('createDeliveryServiceButton')).click();
 		expect(pageData.selectFormSubmitButton.isEnabled()).toBe(false);
-		browser.driver.findElement(by.name('selectFormDropdown')).sendKeys(mockVals.dsType[1]);
-		browser.sleep(250);
+		await browser.driver.findElement(by.name('selectFormDropdown')).sendKeys(mockVals.dsType[1]);
 		expect(pageData.selectFormSubmitButton.isEnabled()).toBe(true);
-		pageData.selectFormSubmitButton.click();
+		await pageData.selectFormSubmitButton.click();
+		expect(browser.getCurrentUrl().then(commonFunctions.urlPath)).toEqual(commonFunctions.urlPath(browser.baseUrl)+"#!/delivery-services/new?type=" + mockVals.dsType[1]);
 	});
 
-	it('should populate and submit the ds form', function() {
+	it('should populate and submit the ds form', async () => {
 		console.log('Filling out form for ' + mockVals.xmlId);
-		browser.sleep(250);
-		expect(browser.getCurrentUrl().then(commonFunctions.urlPath)).toEqual(commonFunctions.urlPath(browser.baseUrl)+"#!/delivery-services/new?type=" + mockVals.dsType[1]);
 		expect(pageData.createButton.isEnabled()).toBe(false);
-		pageData.active.click();
-		pageData.active.sendKeys(mockVals.active);
+		await pageData.active.click();
+		await pageData.active.sendKeys(mockVals.active);
 		commonFunctions.selectDropdownbyNum(pageData.type, 1);
-		pageData.xmlId.sendKeys(mockVals.xmlId);
-		pageData.displayName.sendKeys(mockVals.xmlId);
+		await pageData.xmlId.sendKeys(mockVals.xmlId);
+		await pageData.displayName.sendKeys(mockVals.xmlId);
 		commonFunctions.selectDropdownbyNum(pageData.tenantId, 1);
 		commonFunctions.selectDropdownbyNum(pageData.cdn, 1);
-		pageData.orgServerFqdn.sendKeys(mockVals.orgServerFqdn);
+		await pageData.orgServerFqdn.sendKeys(mockVals.orgServerFqdn);
 		commonFunctions.selectDropdownbyNum(pageData.protocol, 1);
-		pageData.longDesc.sendKeys(mockVals.longDesc);
+		await pageData.longDesc.sendKeys(mockVals.longDesc);
 		expect(pageData.createButton.isEnabled()).toBe(true);
-		pageData.createButton.click();
-		browser.sleep(250);
+		await pageData.createButton.click();
+		expect(browser.getCurrentUrl().then(commonFunctions.urlPath)).toMatch(commonFunctions.urlPath(browser.baseUrl)+"#!/delivery-services/[0-9]+");
 	});
 
-	it('should back out to ds page and verify new ds and update it', function() {
-		console.log('Backing out and verifying ' + mockVals.xmlId + ' exists');
-		browser.setLocation("delivery-services");
-		expect(browser.getCurrentUrl().then(commonFunctions.urlPath)).toEqual(commonFunctions.urlPath(browser.baseUrl)+"#!/delivery-services");
-	});
-
-	it('should update the ds', function() {
+	it('should update the ds', async () => {
 		console.log('Updating the form for ' + mockVals.xmlId);
-		browser.sleep(250);
-		pageData.searchFilter.sendKeys(mockVals.xmlId);
-		browser.sleep(250);
-		element.all(by.repeater('ds in ::deliveryServices')).filter(function(row){
+		await browser.setLocation("delivery-services");
+		await pageData.searchFilter.sendKeys(mockVals.xmlId);
+		await element.all(by.repeater('ds in ::deliveryServices')).filter(function(row){
 			return row.element(by.name('xmlId')).getText().then(function(val){
 				return val.toString() === mockVals.xmlId.toString();
 			});
 		}).get(0).click();
-		browser.sleep(250);
 		expect(pageData.updateButton.isEnabled()).toBe(false);
-		pageData.displayName.sendKeys(mockVals.xmlId + "updated");
+		await pageData.displayName.sendKeys(mockVals.xmlId + "updated");
 		expect(pageData.updateButton.isEnabled()).toBe(true);
-		pageData.updateButton.click();
-		browser.sleep(250);
+		await pageData.updateButton.click();
 		expect(pageData.displayName.getText() === mockVals.name + "updated");
 	});
 
-	it('should delete the ds', function() {
+	it('should delete the ds', async () => {
 		console.log('Deleting ' + mockVals.xmlId);
-		pageData.deleteButton.click();
-		pageData.confirmWithNameInput.sendKeys(mockVals.xmlId);
-		pageData.deletePermanentlyButton.click();
+		await pageData.deleteButton.click();
+		await pageData.confirmWithNameInput.sendKeys(mockVals.xmlId);
+		await pageData.deletePermanentlyButton.click();
 		expect(browser.getCurrentUrl().then(commonFunctions.urlPath)).toEqual(commonFunctions.urlPath(browser.baseUrl)+"#!/delivery-services");
 	});
 });
