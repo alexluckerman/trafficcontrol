@@ -35,62 +35,64 @@ describe('Traffic Portal Servers Test Suite', function() {
 		interfaceMtu: "9000",
 	};
 
-	it('should go to the Servers page', async () => {
+	it('should go to the Servers page', function() {
 		console.log('Looading Configure/Servers');
-		await browser.setLocation("servers");
+		browser.setLocation("servers");
 		expect(browser.getCurrentUrl().then(commonFunctions.urlPath)).toEqual(commonFunctions.urlPath(browser.baseUrl)+"#!/servers");
 	});
 
-	it('should open new Servers form page', async () => {
+	it('should open new Servers form page', function() {
 		console.log('Clicking on Create new server ' + mockVals.hostName);
-		await browser.driver.findElement(by.name('createServersButton')).click();
+		browser.driver.findElement(by.name('createServersButton')).click();
 		expect(browser.getCurrentUrl().then(commonFunctions.urlPath)).toEqual(commonFunctions.urlPath(browser.baseUrl)+"#!/servers/new");
 	});
 
-	it('should fill out form, create button is enabled and submit', async () => {
+	it('should fill out form, create button is enabled and submit', function () {
 		console.log('Filling out Server form');
 		expect(pageData.createButton.isEnabled()).toBe(false);
-		await pageData.status.click();
-		await pageData.status.sendKeys(mockVals.status);
-		await pageData.hostName.sendKeys(mockVals.hostName);
-		await pageData.domainName.sendKeys(mockVals.domainName);
+		pageData.status.click();
+		pageData.status.sendKeys(mockVals.status);
+		pageData.hostName.sendKeys(mockVals.hostName);
+		pageData.domainName.sendKeys(mockVals.domainName);
 		commonFunctions.selectDropdownbyNum(pageData.cdn, 1);
 		commonFunctions.selectDropdownbyNum(pageData.cachegroup, 1);
 		commonFunctions.selectDropdownbyNum(pageData.type, 1);
 		commonFunctions.selectDropdownbyNum(pageData.profile, 1);
-		await pageData.interfaceName.sendKeys(mockVals.interfaceName);
-		await pageData.ipAddress.sendKeys(mockVals.ipAddress);
-		await pageData.ipNetmask.sendKeys(mockVals.ipNetmask);
-		await pageData.ipGateway.sendKeys(mockVals.ipGateway);
-		await pageData.interfaceMtu.sendKeys(mockVals.interfaceMtu);
+		pageData.interfaceName.sendKeys(mockVals.interfaceName);
+		pageData.ipAddress.sendKeys(mockVals.ipAddress);
+		pageData.ipNetmask.sendKeys(mockVals.ipNetmask);
+		pageData.ipGateway.sendKeys(mockVals.ipGateway);
+		pageData.interfaceMtu.sendKeys(mockVals.interfaceMtu);
 		commonFunctions.selectDropdownbyNum(pageData.physLocation, 1);
 		expect(pageData.createButton.isEnabled()).toBe(true);
-		await pageData.createButton.click();
+		pageData.createButton.click();
 		expect(browser.getCurrentUrl().then(commonFunctions.urlPath)).toEqual(commonFunctions.urlPath(browser.baseUrl)+"#!/servers");
 	});
 
-	it('should verify the new Server and then update Server', async () => {
+	it('should verify the new Server and then update Server', function() {
 		console.log('Verifying new server added and updating ' + mockVals.hostName);
-		await pageData.searchFilter.sendKeys(mockVals.hostName);
-		await element.all(by.repeater('s in ::servers')).filter(function(row){
+		browser.sleep(1000);
+		pageData.searchFilter.sendKeys(mockVals.hostName);
+		browser.sleep(250);
+		element.all(by.repeater('s in ::servers')).filter(function(row){
 			return row.element(by.name('hostName')).getText().then(function(val){
 				return val === mockVals.hostName;
 			});
 		}).get(0).click();
-		await pageData.domainName.clear();
-		await pageData.domainName.sendKeys('testupdated.com');
-		await pageData.type.click();
-		await pageData.type.sendKeys('MID');
-		await pageData.updateButton.click();
+		browser.sleep(1000);
+		pageData.domainName.clear();
+		pageData.domainName.sendKeys('testupdated.com');
+		pageData.type.click();
+		pageData.type.sendKeys('MID');
+		pageData.updateButton.click();
 		expect(pageData.domainName.getText() === 'testupdated.com');
 		expect(pageData.type.getText() === 'MID');
 	});
 
-	it('should delete the new Server', async () => {
+	it('should delete the new Server', function() {
 		console.log('Deleting the server ' + mockVals.hostName);
-		await pageData.deleteButton.click();
-		await pageData.confirmWithNameInput.sendKeys(mockVals.hostName);
-		await pageData.deletePermanentlyButton.click();
-		// feel like we should have some kind of expectation here...
+		pageData.deleteButton.click();
+		pageData.confirmWithNameInput.sendKeys(mockVals.hostName);
+		pageData.deletePermanentlyButton.click();
 	});
 });

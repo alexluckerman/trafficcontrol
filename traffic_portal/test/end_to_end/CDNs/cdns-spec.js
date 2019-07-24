@@ -27,44 +27,47 @@ describe('Traffic Portal CDNs Test Suite', function() {
 	const myDomainName = myNewCDN + '.com';
 	const mydnssec = 'true';
 
-	it('should go to the CDNs page', async () => {
+	it('should go to the CDNs page', function() {
 		console.log("Go to the CDNs page");
-		await browser.setLocation("cdns");
-		await browser.getCurrentUrl().then(x => console.log(x));
+		browser.setLocation("cdns");
+		browser.getCurrentUrl().then(x => console.log(x));
 		expect(browser.getCurrentUrl().then(commonFunctions.urlPath)).toEqual(commonFunctions.urlPath(browser.baseUrl)+"#!/cdns");
 	});
 
-	it('should open new CDN form page', async () => {
+	it('should open new CDN form page', function() {
 		console.log("Open new CDN form page");
-		await browser.driver.findElement(by.name('createCdnButton')).click();
+		browser.driver.findElement(by.name('createCdnButton')).click();
 		expect(browser.getCurrentUrl().then(commonFunctions.urlPath)).toEqual(commonFunctions.urlPath(browser.baseUrl)+"#!/cdns/new");
 	});
 
-	it('should fill out form, create button is enabled and submit', async () => {
+	it('should fill out form, create button is enabled and submit', function () {
 		console.log("Filling out form, check create button is enabled and submit");
 		expect(pageData.createButton.isEnabled()).toBe(false);
-		await pageData.dnssecEnabled.click();
-		await pageData.dnssecEnabled.sendKeys(mydnssec);
-		await pageData.name.sendKeys(myNewCDN);
-		await pageData.domainName.sendKeys(myDomainName);
+		pageData.dnssecEnabled.click();
+		pageData.dnssecEnabled.sendKeys(mydnssec);
+		pageData.name.sendKeys(myNewCDN);
+		pageData.domainName.sendKeys(myDomainName);
 		expect(pageData.createButton.isEnabled()).toBe(true);
-		await pageData.createButton.click();
+		pageData.createButton.click();
 		expect(browser.getCurrentUrl().then(commonFunctions.urlPath)).toEqual(commonFunctions.urlPath(browser.baseUrl)+"#!/cdns");
 	});
 
-	it('should verify the new CDN and then update CDN', async () => {
+	it('should verify the new CDN and then update CDN', function() {
 		console.log("verifying the new CDN and then updating CDN");
-		await pageData.searchFilter.sendKeys(myNewCDN);
-		await element.all(by.repeater('cdn in ::cdns')).filter(function(row){
+		browser.sleep(250);
+		pageData.searchFilter.sendKeys(myNewCDN);
+		browser.sleep(250);
+		element.all(by.repeater('cdn in ::cdns')).filter(function(row){
 			return row.element(by.name('name')).getText().then(function(val){
 				return val === myNewCDN;
 			});
 		}).get(0).click();
-		await pageData.domainName.clear();
-		await pageData.domainName.sendKeys(myDomainName + 'updated.com');
-		await pageData.dnssecEnabled.click();
-		await pageData.dnssecEnabled.sendKeys('false');
-		await pageData.updateButton.click();
+		browser.sleep(1000);
+		pageData.domainName.clear();
+		pageData.domainName.sendKeys(myDomainName + 'updated.com');
+		pageData.dnssecEnabled.click();
+		pageData.dnssecEnabled.sendKeys('false');
+		pageData.updateButton.click();
 		expect(pageData.domainName.getText() === myDomainName + 'updated.com');
 	});
 

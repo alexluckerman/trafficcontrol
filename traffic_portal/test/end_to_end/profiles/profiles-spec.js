@@ -27,29 +27,29 @@ describe('Traffic Portal Profiles Test Suite', function() {
 		name: 'profile-' + commonFunctions.shuffle('abcdefghijklmonpqrstuvwxyz0123456789'),
 	};
 
-	it('should go to the profiles page', async () => {
+	it('should go to the profiles page', function() {
 		console.log("Go to the profiles page");
-		await browser.setLocation("profiles");
+		browser.setLocation("profiles");
 		expect(browser.getCurrentUrl().then(commonFunctions.urlPath)).toEqual(commonFunctions.urlPath(browser.baseUrl)+"#!/profiles");
 	});
 
-	it('should open new profile form page', async () => {
+	it('should open new profile form page', function() {
 		console.log("Open new profile form page");
-		await browser.driver.findElement(by.name('createProfileButton')).click();
+		browser.driver.findElement(by.name('createProfileButton')).click();
 		expect(browser.getCurrentUrl().then(commonFunctions.urlPath)).toEqual(commonFunctions.urlPath(browser.baseUrl)+"#!/profiles/new");
 	});
 
-	it('should fill out form, create button is enabled and submit', async () => {
+	it('should fill out form, create button is enabled and submit', function () {
 		console.log("Filling out form, check create button is enabled and submit");
 		expect(pageData.createButton.isEnabled()).toBe(false);
-		await pageData.name.sendKeys(myNewProfile.name);
+		pageData.name.sendKeys(myNewProfile.name);
 		commonFunctions.selectDropdownbyNum(pageData.cdn, 1);
 		commonFunctions.selectDropdownbyNum(pageData.type, 1);
-		await pageData.routingDisabled.click();
-		await pageData.routingDisabled.sendKeys('false');
-		await pageData.description.sendKeys(myNewProfile.name);
+		pageData.routingDisabled.click();
+		pageData.routingDisabled.sendKeys('false');
+		pageData.description.sendKeys(myNewProfile.name);
 		expect(pageData.createButton.isEnabled()).toBe(true);
-		await pageData.createButton.click();
+		pageData.createButton.click();
 		expect(browser.getCurrentUrl().then(commonFunctions.urlPath)).toEqual(commonFunctions.urlPath(browser.baseUrl)+"#!/profiles");
 	});
 

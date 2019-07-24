@@ -21,29 +21,31 @@ var cfunc = require('../common/commonFunctions.js');
 
 describe('Traffic Portal Login Test Suite', function() {
 	const commonFunctions = new cfunc();
+	// browser.get(browser.baseUrl);
 
 	beforeEach(function() {
 		browser.get(browser.baseUrl + '/#!/cdns');
 		browser.wait(function() {
 			return element(by.name('loginUsername')).isPresent();
-		}, 5000, 'Login page took longer than 5 seconds to load');
+		}, 5000);
 	});
 
-	it('should fail login to Traffic Portal with bad user', async () => {
+	it('should fail login to Traffic Portal with bad user', function() {
 		console.log('Negative login test');
-		await element(by.name('loginUsername')).sendKeys('badUser');
-		await element(by.name('loginPass')).sendKeys('badPassword');
-		await element(by.name('loginSubmit')).click();
-		browser.wait(async () => {
-			return await element(by.css('div.ng-binding')).getText() === 'Invalid username or password.';
-		}, 250, 'Login attempt took too long');
+		browser.driver.findElement(by.name('loginUsername')).sendKeys('badUser');
+		browser.driver.findElement(by.name('loginPass')).sendKeys('badPassword');
+		browser.driver.findElement(by.name('loginSubmit')).click();
+		browser.sleep(250);
+		browser.debugger();
+		expect(browser.driver.findElement(by.css('div.ng-binding')).getText()).toEqual('Invalid username or password.');
 	});
 
-	it('should successfully login to Traffic Portal', async () => {
+	it('should successfully login to Traffic Portal', function() {
 		console.log('Logging in to Traffic Portal "' + browser.baseUrl + '" with user "' + browser.params.adminUser + '"');
-		await element(by.name('loginUsername')).sendKeys(browser.params.adminUser);
-		await element(by.name('loginPass')).sendKeys(browser.params.adminPassword);
-		await element(by.name('loginSubmit')).click();
+		browser.driver.findElement(by.name('loginUsername')).sendKeys(browser.params.adminUser);
+		browser.driver.findElement(by.name('loginPass')).sendKeys(browser.params.adminPassword);
+		browser.driver.findElement(by.name('loginSubmit')).click();
+		browser.debugger();
 		expect(browser.getCurrentUrl().then(commonFunctions.urlPath)).toEqual(commonFunctions.urlPath(browser.baseUrl)+"#!/cdns");
 	});
 });

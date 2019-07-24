@@ -31,30 +31,30 @@ describe('Traffic Portal Phys Locations Test Suite', function() {
 		zip: '12345'
 	};
 
-	it('should go to the phys locations page', async () => {
+	it('should go to the phys locations page', function() {
 		console.log("Go to the phys locations page");
-		await browser.setLocation("phys-locations");
+		browser.setLocation("phys-locations");
 		expect(browser.getCurrentUrl().then(commonFunctions.urlPath)).toEqual(commonFunctions.urlPath(browser.baseUrl)+"#!/phys-locations");
 	});
 
-	it('should open new phys locations form page', async () => {
+	it('should open new phys locations form page', function() {
 		console.log("Open new phys location form page");
-		await browser.driver.findElement(by.name('createPhysLocationButton')).click();
+		browser.driver.findElement(by.name('createPhysLocationButton')).click();
 		expect(browser.getCurrentUrl().then(commonFunctions.urlPath)).toEqual(commonFunctions.urlPath(browser.baseUrl)+"#!/phys-locations/new");
 	});
 
-	it('should fill out form, create button is enabled and submit', async () => {
+	it('should fill out form, create button is enabled and submit', function () {
 		console.log("Filling out form, check create button is enabled and submit");
 		expect(pageData.createButton.isEnabled()).toBe(false);
-		await pageData.name.sendKeys(myNewPhysLoc.name);
-		await pageData.shortName.sendKeys(myNewPhysLoc.name);
-		await pageData.address.sendKeys(myNewPhysLoc.address);
-		await pageData.city.sendKeys(myNewPhysLoc.city);
-		await pageData.state.sendKeys(myNewPhysLoc.state);
-		await pageData.zip.sendKeys(myNewPhysLoc.zip);
+		pageData.name.sendKeys(myNewPhysLoc.name);
+		pageData.shortName.sendKeys(myNewPhysLoc.name);
+		pageData.address.sendKeys(myNewPhysLoc.address);
+		pageData.city.sendKeys(myNewPhysLoc.city);
+		pageData.state.sendKeys(myNewPhysLoc.state);
+		pageData.zip.sendKeys(myNewPhysLoc.zip);
 		commonFunctions.selectDropdownbyNum(pageData.region, 1);
 		expect(pageData.createButton.isEnabled()).toBe(true);
-		await pageData.createButton.click();
+		pageData.createButton.click();
 		expect(browser.getCurrentUrl().then(commonFunctions.urlPath)).toEqual(commonFunctions.urlPath(browser.baseUrl)+"#!/phys-locations");
 	});
 
